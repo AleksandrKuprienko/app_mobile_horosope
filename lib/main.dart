@@ -1,5 +1,7 @@
+import 'package:app_mobile_horosope/features/onboarding/pages/onboarding_page.dart';
 import 'package:app_mobile_horosope/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -15,8 +17,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(),
+    return MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'Poppins',
+        cupertinoOverrideTheme: const CupertinoThemeData(
+          primaryColor: Color(0xFF6E56CF),
+        ),
+      ),
+      home: const OnboardingPage(),
     );
   }
 }
