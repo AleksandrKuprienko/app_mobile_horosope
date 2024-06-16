@@ -20,6 +20,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Poppins',
+        scaffoldBackgroundColor: Colors.white,
         cupertinoOverrideTheme: const CupertinoThemeData(
           primaryColor: Color(0xFF6E56CF),
         ),
