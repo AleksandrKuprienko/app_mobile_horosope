@@ -1,6 +1,7 @@
 import 'package:app_mobile_horosope/components/custom_button.dart';
 import 'package:app_mobile_horosope/components/custom_text_field.dart';
-import 'package:app_mobile_horosope/features/registration/pages/registration_page.dart';
+import 'package:app_mobile_horosope/components/spacers.dart';
+import 'package:app_mobile_horosope/features/user/pages/registration_page.dart';
 import 'package:app_mobile_horosope/icons/custom_icons_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: Color(0xFF6E56CF),
                           fontSize: 40,
                           fontWeight: FontWeight.w500,
+                          height: 0.8,
                         ),
                       ),
                       const Text(
@@ -50,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                         'Sign in to access your horoscope history and get updated one',
                         style: TextStyle(fontSize: 16, color: Color(0xFF646D7B)),
                       ),
-                      const SizedBox(height: 32),
+                      const SpaceH32(),
                       CustomTextField(
                         focusNode: FocusNode(),
                         keyboardType: TextInputType.emailAddress,
@@ -60,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                         isObscureText: false,
                         prefixIcon: CustomIcons.mail,
                       ),
-                      const SizedBox(height: 16),
+                      const SpaceH16(),
                       CustomTextField(
                         focusNode: FocusNode(),
                         keyboardType: TextInputType.visiblePassword,
@@ -71,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                         prefixIcon: CustomIcons.lock,
                         suffixIcon: CustomIcons.visibility_off,
                       ),
-                      const SizedBox(height: 24),
+                      const SpaceH24(),
                       GestureDetector(
                         onTap: () {},
                         child: const Row(
@@ -88,12 +90,12 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 24),
+                      const SpaceH24(),
                       CustomButton(
                         title: 'Sign in',
                         onPressed: () {},
                       ),
-                      const SizedBox(height: 16),
+                      const SpaceH16(),
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(color: const Color(0xFFE3E5EA)),
@@ -116,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                                   CustomIcons.google,
                                   color: Color(0xFF000000),
                                 ),
-                                SizedBox(width: 8),
+                                SpaceW8(),
                                 Text(
                                   'Continue with Google',
                                   style: TextStyle(
@@ -130,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SpaceH16(),
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(color: const Color(0xFFE3E5EA)),
@@ -153,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                                   CustomIcons.apple,
                                   color: Color(0xFF000000),
                                 ),
-                                SizedBox(width: 8),
+                                SpaceW8(),
                                 Text(
                                   'Continue with Apple',
                                   style: TextStyle(
