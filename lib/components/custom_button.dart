@@ -1,3 +1,4 @@
+import 'package:app_mobile_horosope/components/spacers.dart';
 import 'package:flutter/cupertino.dart';
 
 class CustomButton extends StatelessWidget {
@@ -18,7 +19,7 @@ class CustomButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(width: 8),
+            const SpaceW8(),
             Text(
               title,
               style: const TextStyle(
@@ -26,7 +27,7 @@ class CustomButton extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
-            const SizedBox(width: 8),
+            const SpaceW8(),
             icon ?? const SizedBox()
           ],
         ),

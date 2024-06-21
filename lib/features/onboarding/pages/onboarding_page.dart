@@ -1,5 +1,6 @@
 import 'package:app_mobile_horosope/components/custom_button.dart';
-import 'package:app_mobile_horosope/features/registration/pages/registration_page.dart';
+import 'package:app_mobile_horosope/components/spacers.dart';
+import 'package:app_mobile_horosope/features/user/pages/registration_page.dart';
 import 'package:app_mobile_horosope/icons/custom_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,7 +21,7 @@ class OnboardingPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const SizedBox(height: 120),
+                const SpaceH120(),
                 Transform.scale(
                   scale: 1.1,
                   child: SvgPicture.asset(
@@ -51,7 +52,7 @@ class OnboardingPage extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 8),
+                      SpaceH8(),
                       Text(
                         'Dive into the world of horoscopes and \ndiscover what the stars have in store for you.',
                         style: TextStyle(
