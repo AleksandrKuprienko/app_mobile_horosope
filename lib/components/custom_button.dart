@@ -12,9 +12,11 @@ class CustomButton extends StatelessWidget {
     return SizedBox(
       height: 52,
       child: CupertinoButton.filled(
-        onPressed: () {
-          onPressed?.call();
-        },
+        onPressed: onPressed != null
+            ? () {
+                onPressed?.call();
+              }
+            : null,
         borderRadius: BorderRadius.circular(12.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
