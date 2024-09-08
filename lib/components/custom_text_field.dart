@@ -7,7 +7,6 @@ class CustomTextField extends StatefulWidget {
     required this.keyboardType,
     required this.hintText,
     required this.isObscureText,
-    required this.errorText,
     required this.focusNode,
     this.suffixIcon,
     super.key,
@@ -18,7 +17,6 @@ class CustomTextField extends StatefulWidget {
   final IconData? suffixIcon;
   final String hintText;
   final bool isObscureText;
-  final String errorText;
   final TextInputType keyboardType;
   final FocusNode focusNode;
 
@@ -62,7 +60,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
             color: const Color(0xFFA4ABB7),
           ),
           alignLabelWithHint: true,
-
           hintText: widget.hintText,
           hintStyle: const TextStyle(fontSize: 16, color: Color(0xFFA4ABB7)),
           enabledBorder: OutlineInputBorder(
@@ -76,7 +73,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
             borderRadius: BorderRadius.circular(12),
           ),
-          // errorText: errorText,
           errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(
               color: Color(0xFFB33822),
