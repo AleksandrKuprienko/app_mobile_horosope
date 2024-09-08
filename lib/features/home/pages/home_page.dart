@@ -1,9 +1,11 @@
 import 'package:app_mobile_horosope/components/spacers.dart';
+import 'package:app_mobile_horosope/features/auth/bloc/auth_bloc.dart';
 import 'package:app_mobile_horosope/icons/custom_icons_icons.dart';
-import 'package:app_mobile_horosope/notifications/app_notifications.dart';
+import 'package:app_mobile_horosope/navigator/main_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -27,11 +29,11 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Hello Guest',
+                          Text(
+                            'Hello ${context.read<AuthBloc>().firebaseAuth.currentUser?.displayName ?? ''}',
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 36, fontWeight: FontWeight.w500),
+                            style: const TextStyle(color: Color(0xFFFFFFFF), fontSize: 36, fontWeight: FontWeight.w500),
                           ),
                           Row(
                             children: [
@@ -128,24 +130,31 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(40),
                     color: const Color(0xFF9280DB),
                   ),
-                  child: IconButton(
+                  child: const IconButton(
+                    highlightColor: Colors.transparent,
                     iconSize: 24,
-                    icon: const Icon(
+                    icon: Icon(
                       CustomIcons.settings,
                       color: Color(0xFFFFFFFF),
                     ),
-                    onPressed: () {},
+                    onPressed: MainNavigator.profilePage,
                   ),
                 ),
                 const SpaceW10(),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40),
-                    color: const Color(0xffcff52c),
+                    color: const Color(0xFF9280DB),
                   ),
                   child: IconButton(
-                    icon: const SizedBox(),
-                    onPressed: () {},
+                    highlightColor: Colors.transparent,
+                    icon: Image.network(context.read<AuthBloc>().getUser?.photoURL ?? '', errorBuilder: (c, _, s) {
+                      return const Icon(
+                        CustomIcons.user,
+                        color: Colors.white,
+                      );
+                    }),
+                    onPressed: MainNavigator.profilePage,
                   ),
                 ),
                 const SpaceW16(),
@@ -166,7 +175,30 @@ class HomePage extends StatelessWidget {
               margin: const EdgeInsets.all(10),
               color: const Color(0xFFE3E5EA),
               child: const Center(child: Text('advertisment')),
-            )
+            ),
+            const SizedBox(height: 16),
+            Container(
+              width: double.maxFinite,
+              margin: const EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                color: const Color(0xFFF7F8FB),
+              ),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Lunar Calendar',
+                    style: TextStyle(
+                      color: Color(0xFF202020),
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -188,10 +220,7 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-        onPressed: () {
-          // context.read<UserProvider>().logOut();
-          AppNotifications.successSnackBar();
-        },
+        onPressed: () => context.read<AuthBloc>().add(const LogoutEvent()),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:app_mobile_horosope/features/auth/bloc/auth_bloc.dart';
-import 'package:app_mobile_horosope/features/onboarding/pages/onboarding_page.dart';
+import 'package:app_mobile_horosope/features/auth/login/login_page.dart';
+import 'package:app_mobile_horosope/features/home/pages/home_page.dart';
 import 'package:app_mobile_horosope/firebase_options.dart';
 import 'package:app_mobile_horosope/horoscope_bloc_observer.dart';
 import 'package:app_mobile_horosope/navigator/main_navigator.dart';
@@ -23,7 +24,7 @@ void main() async {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
-      runApp(const Initialization());
+      runApp(const _App());
     },
     (error, stackTrace) {
       log('RunZoneGuarded ERROR ===> ${error.toString()}');
@@ -32,22 +33,17 @@ void main() async {
   );
 }
 
-class Initialization extends StatelessWidget {
-  const Initialization({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const _App();
-  }
-}
-
 class _App extends StatelessWidget {
   const _App();
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc(firebaseAuth: FirebaseAuth.instance),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthBloc>(
+          create: (BuildContext context) => AuthBloc(firebaseAuth: FirebaseAuth.instance),
+        ),
+      ],
       child: MaterialApp(
         scaffoldMessengerKey: AppNotifications.notificationsKey,
         navigatorKey: MainNavigator.navigatorKey,
@@ -59,7 +55,34 @@ class _App extends StatelessWidget {
             primaryColor: Color(0xFF6E56CF),
           ),
         ),
-        home: const OnboardingPage(),
+        home: const _LoadPage(),
+      ),
+    );
+  }
+}
+
+class _LoadPage extends StatelessWidget {
+  const _LoadPage();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: BlocBuilder<AuthBloc, AuthState>(
+          buildWhen: (p, c) {
+            if (p is AuthenticationSuccessState && c is AuthenticationSuccessState) {
+              return false;
+            }
+            return true;
+          },
+          builder: (context, state) {
+            return switch (state) {
+              AuthenticationLoadingState _ => const CircularProgressIndicator.adaptive(),
+              AuthenticationSuccessState _ => const HomePage(),
+              AuthenticationFailureState _ => const LoginPage(),
+            };
+          },
+        ),
       ),
     );
   }

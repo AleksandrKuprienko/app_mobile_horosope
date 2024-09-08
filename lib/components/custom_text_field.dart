@@ -8,6 +8,7 @@ class CustomTextField extends StatefulWidget {
     required this.hintText,
     required this.isObscureText,
     required this.focusNode,
+    this.onSuffixTap,
     this.suffixIcon,
     super.key,
   });
@@ -19,6 +20,7 @@ class CustomTextField extends StatefulWidget {
   final bool isObscureText;
   final TextInputType keyboardType;
   final FocusNode focusNode;
+  final void Function()? onSuffixTap;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -55,7 +57,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             color: widget.focusNode.hasFocus ? const Color(0xFF202020) : const Color(0xFFA4ABB7),
           ),
           suffixIcon: IconButton(
-            onPressed: () {},
+            onPressed: widget.onSuffixTap,
             icon: Icon(widget.suffixIcon),
             color: const Color(0xFFA4ABB7),
           ),

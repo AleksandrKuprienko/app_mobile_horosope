@@ -1,22 +1,32 @@
 import 'package:app_mobile_horosope/components/custom_button.dart';
 import 'package:app_mobile_horosope/components/custom_text_field.dart';
 import 'package:app_mobile_horosope/components/spacers.dart';
-import 'package:app_mobile_horosope/features/user/pages/login_page.dart';
+import 'package:app_mobile_horosope/features/auth/bloc/auth_bloc.dart';
 import 'package:app_mobile_horosope/icons/custom_icons_icons.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:app_mobile_horosope/navigator/main_navigator.dart';
+import 'package:app_mobile_horosope/notifications/app_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class RegistrationPage extends StatefulWidget {
-  const RegistrationPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<RegistrationPage> createState() => _RegistrationPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegistrationPageState extends State<RegistrationPage> {
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool showPassword = false;
+
+  @override
+  void initState() {
+    _emailController.text = 'sahkakup3r@gmail.com';
+    _passwordController.text = 'qwerty';
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +45,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Hello',
+                        'Welcome',
                         style: TextStyle(
                           color: Color(0xFF6E56CF),
                           fontSize: 40,
@@ -44,14 +54,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                       ),
                       const Text(
-                        'there!',
+                        'back!',
                         style: TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       const Text(
-                        'Find your destiny written in the stars. Sign up now to reveal your future',
+                        'Sign in to access your horoscope history and get updated one',
                         style: TextStyle(fontSize: 16, color: Color(0xFF646D7B)),
                       ),
                       const SpaceH32(),
@@ -59,7 +69,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         focusNode: FocusNode(),
                         keyboardType: TextInputType.emailAddress,
                         controller: _emailController,
-                        errorText: 'Erroremail',
                         hintText: 'Email',
                         isObscureText: false,
                         prefixIcon: CustomIcons.mail,
@@ -69,50 +78,40 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         focusNode: FocusNode(),
                         keyboardType: TextInputType.visiblePassword,
                         controller: _passwordController,
-                        errorText: 'Erroremail',
                         hintText: 'Password',
-                        isObscureText: true,
+                        isObscureText: showPassword,
+                        onSuffixTap: () {
+                          setState(() {
+                            showPassword = !showPassword;
+                          });
+                        },
                         prefixIcon: CustomIcons.lock,
                         suffixIcon: CustomIcons.visibility_off,
                       ),
                       const SpaceH24(),
                       GestureDetector(
                         onTap: () {},
-                        child: const Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                  text: 'By signing up, you agree to our ', style: TextStyle(color: Color(0xFF868D9D))),
-                              TextSpan(
-                                text: 'Terms of Service ',
-                                style: TextStyle(
-                                  color: Color(0xFF6E56CF),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              'Forgot password',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF0588F0),
                               ),
-                              TextSpan(text: 'and ', style: TextStyle(color: Color(0xFF868D9D))),
-                              TextSpan(
-                                text: 'Privacy Policy',
-                                style: TextStyle(
-                                  color: Color(0xFF6E56CF),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                ),
-                              )
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                       const SpaceH24(),
                       CustomButton(
-                        title: 'Sign up',
+                        title: 'Sign in',
                         onPressed: () {
-                          FirebaseAuth.instance.createUserWithEmailAndPassword(
-                              email: _emailController.text, password: _passwordController.text);
-
-                          // Navigator.of(context)
-                          //     .pushReplacement(MaterialPageRoute(builder: (context) => const HomePage()));
+                          context.read<AuthBloc>().add(
+                                LoginEvent(email: _emailController.text, password: _passwordController.text),
+                              );
                         },
                       ),
                       const SpaceH16(),
@@ -130,7 +129,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ),
                           child: CupertinoButton.filled(
                             borderRadius: BorderRadius.circular(12.0),
-                            onPressed: () {},
+                            onPressed: () {
+                              AppNotifications.errorSnackBar('Not implemented');
+                            },
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -167,7 +168,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ),
                           child: CupertinoButton.filled(
                             borderRadius: BorderRadius.circular(12.0),
-                            onPressed: () {},
+                            onPressed: () {
+                              AppNotifications.errorSnackBar('Not implemented');
+                            },
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -193,15 +196,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
+                      MainNavigator.registration();
                     },
                     child: const Center(
                       child: Text.rich(
                         TextSpan(
                           children: [
-                            TextSpan(text: 'Already have and account? ', style: TextStyle(color: Color(0xFF868D9D))),
+                            TextSpan(text: 'Don’t have an account? ', style: TextStyle(color: Color(0xFF868D9D))),
                             TextSpan(
-                              text: 'Sign in',
+                              text: 'Create an account',
                               style: TextStyle(
                                 color: Color(0xFF6E56CF),
                                 fontWeight: FontWeight.w500,

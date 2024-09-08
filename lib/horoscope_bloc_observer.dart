@@ -25,7 +25,6 @@ class HoroscopeBlocObserver extends BlocObserver {
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
     log('ONERROR');
-
     log('Bloc: ${bloc.runtimeType}');
     log('Error: ${error.toString()}');
 

@@ -1,31 +1,36 @@
 import 'package:app_mobile_horosope/components/custom_button.dart';
 import 'package:app_mobile_horosope/components/custom_text_field.dart';
 import 'package:app_mobile_horosope/components/spacers.dart';
-import 'package:app_mobile_horosope/features/user/pages/registration_page.dart';
+import 'package:app_mobile_horosope/features/auth/bloc/auth_bloc.dart';
+import 'package:app_mobile_horosope/features/auth/login/login_page.dart';
 import 'package:app_mobile_horosope/icons/custom_icons_icons.dart';
+import 'package:app_mobile_horosope/notifications/app_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: CustomScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        slivers: [
-          SliverFillRemaining(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      body: SafeArea(
+        top: false,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 64, 16, 16),
+            child: Form(
+              key: _formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -33,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Welcome',
+                        'Hello',
                         style: TextStyle(
                           color: Color(0xFF6E56CF),
                           fontSize: 40,
@@ -42,14 +47,14 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const Text(
-                        'back!',
+                        'there!',
                         style: TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       const Text(
-                        'Sign in to access your horoscope history and get updated one',
+                        'Find your destiny written in the stars. Sign up now to reveal your future',
                         style: TextStyle(fontSize: 16, color: Color(0xFF646D7B)),
                       ),
                       const SpaceH32(),
@@ -57,7 +62,6 @@ class _LoginPageState extends State<LoginPage> {
                         focusNode: FocusNode(),
                         keyboardType: TextInputType.emailAddress,
                         controller: _emailController,
-                        errorText: 'Erroremail',
                         hintText: 'Email',
                         isObscureText: false,
                         prefixIcon: CustomIcons.mail,
@@ -67,7 +71,6 @@ class _LoginPageState extends State<LoginPage> {
                         focusNode: FocusNode(),
                         keyboardType: TextInputType.visiblePassword,
                         controller: _passwordController,
-                        errorText: 'Erroremail',
                         hintText: 'Password',
                         isObscureText: true,
                         prefixIcon: CustomIcons.lock,
@@ -76,25 +79,43 @@ class _LoginPageState extends State<LoginPage> {
                       const SpaceH24(),
                       GestureDetector(
                         onTap: () {},
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Forgot password',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF0588F0),
+                        child: const Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'By signing up, you agree to our ',
+                                style: TextStyle(
+                                  color: Color(0xFF868D9D),
+                                ),
                               ),
-                            ),
-                          ],
+                              TextSpan(
+                                text: 'Terms of Service ',
+                                style: TextStyle(
+                                  color: Color(0xFF6E56CF),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              TextSpan(text: 'and ', style: TextStyle(color: Color(0xFF868D9D))),
+                              TextSpan(
+                                text: 'Privacy Policy',
+                                style: TextStyle(
+                                  color: Color(0xFF6E56CF),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       const SpaceH24(),
                       CustomButton(
-                        title: 'Sign in',
-                        onPressed: () {},
-                      ),
+                          title: 'Sign up',
+                          onPressed: () {
+                            context.read<AuthBloc>().add(
+                                RegistrationEvent(email: _emailController.text, password: _passwordController.text));
+                          }),
                       const SpaceH16(),
                       Container(
                         decoration: BoxDecoration(
@@ -110,7 +131,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           child: CupertinoButton.filled(
                             borderRadius: BorderRadius.circular(12.0),
-                            onPressed: () {},
+                            onPressed: () {
+                              AppNotifications.errorSnackBar('Not implemented');
+                            },
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -147,7 +170,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           child: CupertinoButton.filled(
                             borderRadius: BorderRadius.circular(12.0),
-                            onPressed: () {},
+                            onPressed: () {
+                              AppNotifications.errorSnackBar('Not implemented');
+                            },
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -171,24 +196,29 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RegistrationPage()));
-                    },
-                    child: const Center(
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(text: 'Don’t have an account? ', style: TextStyle(color: Color(0xFF868D9D))),
-                            TextSpan(
-                              text: 'Create an account',
-                              style: TextStyle(
-                                color: Color(0xFF6E56CF),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height / 6,
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
+                      },
+                      child: const Center(
+                        child: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(text: 'Already have and account? ', style: TextStyle(color: Color(0xFF868D9D))),
+                              TextSpan(
+                                text: 'Sign in',
+                                style: TextStyle(
+                                  color: Color(0xFF6E56CF),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -196,8 +226,8 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-          )
-        ],
+          ),
+        ),
       ),
     );
   }
