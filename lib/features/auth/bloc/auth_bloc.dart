@@ -23,7 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     firebaseAuth.userChanges().listen((modifiedUser) {
-      print('Modified user ${modifiedUser.toString()}');
+      // print('Modified user ${modifiedUser.toString()}');
     });
   }
 
