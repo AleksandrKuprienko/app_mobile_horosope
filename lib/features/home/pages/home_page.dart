@@ -5,6 +5,7 @@ import 'package:app_mobile_horosope/features/profile/bloc/profile_bloc.dart';
 import 'package:app_mobile_horosope/features/settings/pages/setting_page.dart';
 import 'package:app_mobile_horosope/icons/custom_icons_icons.dart';
 import 'package:app_mobile_horosope/navigator/main_navigator.dart';
+import 'package:app_mobile_horosope/notifications/app_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -239,7 +240,9 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          onPressed: () => context.read<AuthBloc>().add(const LogoutEvent()),
+          onPressed: () {
+            AppNotifications.successSnackBar('Я просто кнопка функціонал буде потім');
+          },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
