@@ -2,8 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:app_mobile_horosope/features/auth/bloc/auth_bloc.dart';
-import 'package:app_mobile_horosope/features/auth/login/login_page.dart';
-import 'package:app_mobile_horosope/features/home/pages/home_page.dart';
+import 'package:app_mobile_horosope/features/profile/bloc/profile_bloc.dart';
 import 'package:app_mobile_horosope/firebase_options.dart';
 import 'package:app_mobile_horosope/horoscope_bloc_observer.dart';
 import 'package:app_mobile_horosope/navigator/main_navigator.dart';
@@ -24,7 +23,10 @@ void main() async {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
-      runApp(const _App());
+      FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+      runApp(_App(
+        firebaseAuth: firebaseAuth,
+      ));
     },
     (error, stackTrace) {
       log('RunZoneGuarded ERROR ===> ${error.toString()}');
@@ -34,29 +36,33 @@ void main() async {
 }
 
 class _App extends StatelessWidget {
-  const _App();
+  const _App({
+    required this.firebaseAuth,
+  });
+  final FirebaseAuth firebaseAuth;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(
-          create: (BuildContext context) => AuthBloc(firebaseAuth: FirebaseAuth.instance),
-        ),
+            create: (BuildContext context) => AuthBloc(firebaseAuth: firebaseAuth)..add(const AuthListenerEvent())),
+        BlocProvider(create: (BuildContext context) => ProfileBloc(firebaseAuth: firebaseAuth))
       ],
       child: MaterialApp(
-        scaffoldMessengerKey: AppNotifications.notificationsKey,
-        navigatorKey: MainNavigator.navigatorKey,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: 'Poppins',
-          scaffoldBackgroundColor: Colors.white,
-          cupertinoOverrideTheme: const CupertinoThemeData(
-            primaryColor: Color(0xFF6E56CF),
+          scaffoldMessengerKey: AppNotifications.notificationsKey,
+          navigatorKey: MainNavigator.navigatorKey,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            fontFamily: 'Poppins',
+            scaffoldBackgroundColor: Colors.white,
+            cupertinoOverrideTheme: const CupertinoThemeData(
+              primaryColor: Color(0xFF6E56CF),
+            ),
           ),
-        ),
-        home: const _LoadPage(),
-      ),
+          home: const _LoadPage()),
     );
   }
 }
@@ -67,22 +73,12 @@ class _LoadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: BlocBuilder<AuthBloc, AuthState>(
-          buildWhen: (p, c) {
-            if (p is AuthenticationSuccessState && c is AuthenticationSuccessState) {
-              return false;
-            }
-            return true;
-          },
-          builder: (context, state) {
-            return switch (state) {
-              AuthenticationLoadingState _ => const CircularProgressIndicator.adaptive(),
-              AuthenticationSuccessState _ => const HomePage(),
-              AuthenticationFailureState _ => const LoginPage(),
-            };
-          },
-        ),
+      backgroundColor: const Color(0xFF6E56CF),
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          state is AuthenticationSuccessState ? MainNavigator.home() : MainNavigator.login();
+        },
+        child: const SizedBox(),
       ),
     );
   }

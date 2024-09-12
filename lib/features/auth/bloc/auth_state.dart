@@ -7,7 +7,10 @@ sealed class AuthState extends Equatable {
   List<Object> get props => [];
 }
 
-final class AuthenticationSuccessState extends AuthState {}
+final class AuthenticationSuccessState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
 
 final class AuthenticationFailureState extends AuthState {}
 

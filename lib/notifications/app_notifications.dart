@@ -4,24 +4,26 @@ class AppNotifications {
   static GlobalKey<ScaffoldMessengerState> notificationsKey = GlobalKey<ScaffoldMessengerState>();
 
   static successSnackBar(String? message) {
+    notificationsKey.currentState!.hideCurrentSnackBar();
     notificationsKey.currentState!.showSnackBar(
       SnackBar(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 0,
         behavior: SnackBarBehavior.floating,
-        backgroundColor: const Color(0xffF7F8FB),
+        backgroundColor: const Color.fromARGB(255, 84, 167, 29),
         content: Center(
           child: Text(
             message ?? 'Success',
-            style: const TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 4),
       ),
     );
   }
 
   static errorSnackBar(String error) {
+    notificationsKey.currentState!.hideCurrentSnackBar();
     notificationsKey.currentState!.showSnackBar(
       SnackBar(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
