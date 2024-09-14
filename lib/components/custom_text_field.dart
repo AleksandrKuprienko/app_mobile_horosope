@@ -1,3 +1,4 @@
+import 'package:app_mobile_horosope/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -51,26 +52,26 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-          focusColor: const Color(0xFFA4ABB7),
+          focusColor: AppPallete.gray300,
           prefixIcon: Icon(
             widget.prefixIcon,
-            color: widget.focusNode.hasFocus ? const Color(0xFF202020) : const Color(0xFFA4ABB7),
+            color: widget.focusNode.hasFocus ? const Color(0xFF202020) : AppPallete.gray300,
           ),
           suffixIcon: IconButton(
             onPressed: widget.onSuffixTap,
             icon: Icon(widget.suffixIcon),
-            color: const Color(0xFFA4ABB7),
+            color: AppPallete.gray300,
           ),
           alignLabelWithHint: true,
           hintText: widget.hintText,
-          hintStyle: const TextStyle(fontSize: 16, color: Color(0xFFA4ABB7)),
+          hintStyle: const TextStyle(fontSize: 16, color: AppPallete.gray300),
           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xFFE3E5EA)),
+            borderSide: const BorderSide(color: AppPallete.gray100),
             borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Color(0xFF6E56CF),
+              color: AppPallete.purple500,
               width: 2,
             ),
             borderRadius: BorderRadius.circular(12),

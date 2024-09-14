@@ -3,6 +3,8 @@ import 'package:app_mobile_horosope/components/spacers.dart';
 import 'package:app_mobile_horosope/features/auth/bloc/auth_bloc.dart';
 import 'package:app_mobile_horosope/features/profile/bloc/profile_bloc.dart';
 import 'package:app_mobile_horosope/icons/custom_icons_icons.dart';
+import 'package:app_mobile_horosope/navigator/main_navigator.dart';
+import 'package:app_mobile_horosope/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,9 +33,9 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE3E5EA),
+      backgroundColor: AppPallete.gray100,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFE3E5EA),
+        backgroundColor: AppPallete.gray100,
         leadingWidth: 100,
         leading: IconButton(
           highlightColor: Colors.transparent,
@@ -41,20 +43,20 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               Icon(
                 CustomIcons.arrow_left_alt,
-                color: Color(0xFF646D7B),
+                color: AppPallete.gray500,
               ),
               SpaceW10(),
               Text(
                 'Back',
                 style: TextStyle(
-                  color: Color(0xFF646D7B),
+                  color: AppPallete.gray500,
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
                 ),
               ),
             ],
           ),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => MainNavigator.pop(),
         ),
       ),
       body: Column(
@@ -76,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(height: 20),
           Text(
             context.read<ProfileBloc>().firebaseAuth.currentUser?.email ?? '',
-            style: const TextStyle(fontWeight: FontWeight.w400, color: Color(0xFF646D7B), fontSize: 16),
+            style: const TextStyle(fontWeight: FontWeight.w400, color: AppPallete.gray500, fontSize: 16),
             textAlign: TextAlign.center,
           ),
           const SpaceH32(),

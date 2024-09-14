@@ -6,6 +6,7 @@ import 'package:app_mobile_horosope/features/settings/pages/setting_page.dart';
 import 'package:app_mobile_horosope/icons/custom_icons_icons.dart';
 import 'package:app_mobile_horosope/navigator/main_navigator.dart';
 import 'package:app_mobile_horosope/notifications/app_notifications.dart';
+import 'package:app_mobile_horosope/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -19,7 +20,7 @@ class HomePage extends StatelessWidget {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppPallete.white,
         body: NestedScrollView(
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -48,21 +49,21 @@ class HomePage extends StatelessWidget {
                                 Text(
                                   DateFormat('EEEE').format(DateTime.now()).toString(),
                                   style: const TextStyle(
-                                    color: Color(0xFFDBD5F3),
+                                    color: AppPallete.purple200,
                                     fontSize: 16,
                                   ),
                                 ),
                                 const Text(
                                   ', ',
                                   style: TextStyle(
-                                    color: Color(0xFFDBD5F3),
+                                    color: AppPallete.purple200,
                                     fontSize: 16,
                                   ),
                                 ),
                                 Text(
                                   DateFormat.yMMMMd().format(DateTime.now()).toString(),
                                   style: const TextStyle(
-                                    color: Color(0xFFDBD5F3),
+                                    color: AppPallete.purple200,
                                     fontSize: 16,
                                   ),
                                 ),
@@ -72,7 +73,7 @@ class HomePage extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF9280DB),
+                                color: AppPallete.purple400,
                                 borderRadius: BorderRadius.circular(24),
                               ),
                               child: Column(
@@ -103,7 +104,7 @@ class HomePage extends StatelessWidget {
                                           Text(
                                             'Daily horoscope',
                                             style: TextStyle(
-                                              color: Color(0xFFDBD5F3),
+                                              color: AppPallete.purple200,
                                               fontSize: 14,
                                             ),
                                           ),
@@ -136,7 +137,7 @@ class HomePage extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
-                      color: const Color(0xFF9280DB),
+                      color: AppPallete.purple400,
                     ),
                     child: IconButton(
                       highlightColor: Colors.transparent,
@@ -153,7 +154,7 @@ class HomePage extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
-                      color: const Color(0xFF9280DB),
+                      color: AppPallete.purple400,
                     ),
                     child: IconButton(
                       highlightColor: Colors.transparent,
@@ -167,10 +168,10 @@ class HomePage extends StatelessWidget {
                           const Badge(
                             label: Icon(
                               CustomIcons.stars,
-                              color: Colors.white,
+                              color: AppPallete.white,
                               size: 20,
                             ),
-                            backgroundColor: Color(0xFF9280DB),
+                            backgroundColor: AppPallete.purple400,
                           )
                         ],
                       ),
@@ -179,12 +180,17 @@ class HomePage extends StatelessWidget {
                   ),
                   const SpaceW16(),
                 ],
-                title: SvgPicture.asset(
-                  'assets/images/logo.svg',
-                  height: 26,
-                  width: 110,
+                title: AnimatedCrossFade(
+                  duration: const Duration(milliseconds: 5000),
+                  crossFadeState: CrossFadeState.showSecond,
+                  firstChild: Container(),
+                  secondChild: SvgPicture.asset(
+                    'assets/images/logo.svg',
+                    height: 26,
+                    width: 110,
+                  ),
                 ),
-                backgroundColor: const Color(0xFF6E56CF),
+                backgroundColor: AppPallete.purple500,
               )
             ];
           },
@@ -193,7 +199,7 @@ class HomePage extends StatelessWidget {
               Container(
                 height: 84,
                 margin: const EdgeInsets.all(10),
-                color: const Color(0xFFE3E5EA),
+                color: AppPallete.gray100,
                 child: const Center(child: Text('advertisment')),
               ),
               const SizedBox(height: 16),
@@ -224,7 +230,7 @@ class HomePage extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton.extended(
           elevation: 0,
-          backgroundColor: const Color(0xFF6E56CF),
+          backgroundColor: AppPallete.purple500,
           label: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             child: Row(

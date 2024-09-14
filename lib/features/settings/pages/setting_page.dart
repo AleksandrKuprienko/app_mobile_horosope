@@ -1,6 +1,8 @@
 import 'package:app_mobile_horosope/components/spacers.dart';
 import 'package:app_mobile_horosope/features/auth/bloc/auth_bloc.dart';
 import 'package:app_mobile_horosope/icons/custom_icons_icons.dart';
+import 'package:app_mobile_horosope/navigator/main_navigator.dart';
+import 'package:app_mobile_horosope/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,9 +12,9 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE3E5EA),
+      backgroundColor: AppPallete.gray100,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFE3E5EA),
+        backgroundColor: AppPallete.gray100,
         leadingWidth: 100,
         leading: IconButton(
           highlightColor: Colors.transparent,
@@ -20,20 +22,20 @@ class SettingPage extends StatelessWidget {
             children: [
               Icon(
                 CustomIcons.arrow_left_alt,
-                color: Color(0xFF646D7B),
+                color: AppPallete.gray500,
               ),
               SpaceW10(),
               Text(
                 'Back',
                 style: TextStyle(
-                  color: Color(0xFF646D7B),
+                  color: AppPallete.gray500,
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
                 ),
               ),
             ],
           ),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => MainNavigator.pop(),
         ),
       ),
       body: ListView(
@@ -58,7 +60,7 @@ class SettingPage extends StatelessWidget {
               () {},
               trailing: const Icon(
                 CustomIcons.north_east,
-                color: Color(0xFFA4ABB7),
+                color: AppPallete.gray300,
               ),
             ),
             _buildNavigationTile('Feedback', CustomIcons.mail, () {}),
@@ -73,12 +75,12 @@ class SettingPage extends StatelessWidget {
               () {
                 context.read<AuthBloc>().firebaseAuth.signOut();
               },
-              color: const Color(0xFF646D7B),
+              color: AppPallete.gray500,
             ),
           ]),
           const Padding(
             padding: EdgeInsets.all(16.0),
-            child: Text('Version 0.1.1', style: TextStyle(color: Color(0xFF646D7B))),
+            child: Text('Version 0.1.1', style: TextStyle(color: AppPallete.gray500)),
           ),
         ],
       ),
@@ -87,7 +89,7 @@ class SettingPage extends StatelessWidget {
 
   Widget _buildSettingsGroup(List<Widget> children) {
     return Card(
-      color: Colors.white,
+      color: AppPallete.white,
       elevation: 0,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(children: children),
@@ -96,7 +98,7 @@ class SettingPage extends StatelessWidget {
 
   Widget _buildSwitchTile(String title, IconData icon) {
     return ListTile(
-      leading: Icon(icon, color: const Color(0xff6e56cf)),
+      leading: Icon(icon, color: AppPallete.purple500),
       title: Text(
         title,
         style: const TextStyle(
@@ -116,7 +118,7 @@ class SettingPage extends StatelessWidget {
       splashColor: Colors.transparent,
       enableFeedback: true,
       onTap: onTap,
-      leading: Icon(icon, color: const Color(0xff6e56cf)),
+      leading: Icon(icon, color: AppPallete.purple500),
       title: Text(
         title,
         style: const TextStyle(
@@ -127,7 +129,7 @@ class SettingPage extends StatelessWidget {
       trailing: trailing ??
           const Icon(
             CustomIcons.chevron_forward,
-            color: Color(0xFFA4ABB7),
+            color: AppPallete.gray300,
           ),
     );
   }
@@ -136,7 +138,7 @@ class SettingPage extends StatelessWidget {
     return ListTile(
       enableFeedback: true,
       onTap: onTap,
-      leading: Icon(icon, color: color ?? const Color(0xff6e56cf)),
+      leading: Icon(icon, color: color ?? AppPallete.purple500),
       title: Text(title, style: TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w500)),
     );
   }
