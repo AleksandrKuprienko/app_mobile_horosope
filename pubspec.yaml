@@ -47,10 +47,21 @@ dependencies:
   equatable: ^2.0.5
   image_picker: ^1.1.2
 
+
+custom_lint:
+  rules:
+    - avoid_log
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  custom_lint: ^0.6.7
+  analyzer: ^6.7.0
+  horoscopix_analyzer_lints:
+    path: horoscopix_analyzer_lints
+  analyzer_plugin: ^0.11.3
+  custom_lint_builder: ^0.6.7
 
 
 flutter:
