@@ -4,6 +4,7 @@ import 'package:app_mobile_horosope/components/spacers.dart';
 import 'package:app_mobile_horosope/features/auth/bloc/auth_bloc.dart';
 import 'package:app_mobile_horosope/icons/custom_icons_icons.dart';
 import 'package:app_mobile_horosope/navigator/main_navigator.dart';
+import 'package:app_mobile_horosope/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                         const Text(
                           'Welcome',
                           style: TextStyle(
-                            color: Color(0xFF6E56CF),
+                            color: AppPallete.purple500,
                             fontSize: 40,
                             fontWeight: FontWeight.w500,
                             height: 0.8,
@@ -62,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const Text(
                           'Sign in to access your horoscope history and get updated one',
-                          style: TextStyle(fontSize: 16, color: Color(0xFF646D7B)),
+                          style: TextStyle(fontSize: 16, color: AppPallete.gray500),
                         ),
                         const SpaceH32(),
                         CustomTextField(
@@ -117,14 +118,14 @@ class _LoginPageState extends State<LoginPage> {
                         const SpaceH16(),
                         // Container(
                         //   decoration: BoxDecoration(
-                        //     border: Border.all(color: const Color(0xFFE3E5EA)),
+                        //     border: Border.all(color: AppPallete.gray100),
                         //     borderRadius: BorderRadius.circular(12.0),
                         //   ),
                         //   height: 52,
                         //   child: Theme(
                         //     data: ThemeData(
                         //       cupertinoOverrideTheme: const CupertinoThemeData(
-                        //         primaryColor: Colors.white,
+                        //         primaryColor: AppPallete.white,
                         //       ),
                         //     ),
                         //     child: CupertinoButton.filled(
@@ -156,14 +157,14 @@ class _LoginPageState extends State<LoginPage> {
                         // const SpaceH16(),
                         // Container(
                         //   decoration: BoxDecoration(
-                        //     border: Border.all(color: const Color(0xFFE3E5EA)),
+                        //     border: Border.all(color: AppPallete.gray100),
                         //     borderRadius: BorderRadius.circular(12.0),
                         //   ),
                         //   height: 52,
                         //   child: Theme(
                         //     data: ThemeData(
                         //       cupertinoOverrideTheme: const CupertinoThemeData(
-                        //         primaryColor: Colors.white,
+                        //         primaryColor: AppPallete.white,
                         //       ),
                         //     ),
                         //     child: CupertinoButton.filled(
@@ -202,11 +203,11 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text.rich(
                           TextSpan(
                             children: [
-                              TextSpan(text: 'Don’t have an account? ', style: TextStyle(color: Color(0xFF868D9D))),
+                              TextSpan(text: 'Don’t have an account? ', style: TextStyle(color: AppPallete.purple500)),
                               TextSpan(
                                 text: 'Create an account',
                                 style: TextStyle(
-                                  color: Color(0xFF6E56CF),
+                                  color: AppPallete.purple500,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14,
                                 ),

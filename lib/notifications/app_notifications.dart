@@ -1,3 +1,4 @@
+import 'package:app_mobile_horosope/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 
 class AppNotifications {
@@ -14,7 +15,7 @@ class AppNotifications {
         content: Center(
           child: Text(
             message ?? 'Success',
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: AppPallete.white),
           ),
         ),
         duration: const Duration(seconds: 4),

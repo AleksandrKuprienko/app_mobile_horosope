@@ -3,6 +3,8 @@ import 'package:app_mobile_horosope/components/custom_text_field.dart';
 import 'package:app_mobile_horosope/components/spacers.dart';
 import 'package:app_mobile_horosope/features/auth/bloc/auth_bloc.dart';
 import 'package:app_mobile_horosope/icons/custom_icons_icons.dart';
+import 'package:app_mobile_horosope/navigator/main_navigator.dart';
+import 'package:app_mobile_horosope/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,7 +42,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         const Text(
                           'Hello',
                           style: TextStyle(
-                            color: Color(0xFF6E56CF),
+                            color: AppPallete.purple500,
                             fontSize: 40,
                             fontWeight: FontWeight.w500,
                             height: 0.8,
@@ -55,7 +57,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                         const Text(
                           'Find your destiny written in the stars. Sign up now to reveal your future',
-                          style: TextStyle(fontSize: 16, color: Color(0xFF646D7B)),
+                          style: TextStyle(fontSize: 16, color: AppPallete.gray500),
                         ),
                         const SpaceH32(),
                         CustomTextField(
@@ -90,22 +92,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 TextSpan(
                                   text: 'By signing up, you agree to our ',
                                   style: TextStyle(
-                                    color: Color(0xFF868D9D),
+                                    color: AppPallete.gray400,
                                   ),
                                 ),
                                 TextSpan(
                                   text: 'Terms of Service ',
                                   style: TextStyle(
-                                    color: Color(0xFF6E56CF),
+                                    color: AppPallete.purple500,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 14,
                                   ),
                                 ),
-                                TextSpan(text: 'and ', style: TextStyle(color: Color(0xFF868D9D))),
+                                TextSpan(text: 'and ', style: TextStyle(color: AppPallete.gray400)),
                                 TextSpan(
                                   text: 'Privacy Policy',
                                   style: TextStyle(
-                                    color: Color(0xFF6E56CF),
+                                    color: AppPallete.purple500,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 14,
                                   ),
@@ -124,14 +126,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         const SpaceH16(),
                         // Container(
                         //   decoration: BoxDecoration(
-                        //     border: Border.all(color: const Color(0xFFE3E5EA)),
+                        //     border: Border.all(color: AppPallete.gray100),
                         //     borderRadius: BorderRadius.circular(12.0),
                         //   ),
                         //   height: 52,
                         //   child: Theme(
                         //     data: ThemeData(
                         //       cupertinoOverrideTheme: const CupertinoThemeData(
-                        //         primaryColor: Colors.white,
+                        //         primaryColor: AppPallete.white,
                         //       ),
                         //     ),
                         //     child: CupertinoButton.filled(
@@ -163,14 +165,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         // const SpaceH16(),
                         //   Container(
                         //     decoration: BoxDecoration(
-                        //       border: Border.all(color: const Color(0xFFE3E5EA)),
+                        //       border: Border.all(color: AppPallete.gray100),
                         //       borderRadius: BorderRadius.circular(12.0),
                         //     ),
                         //     height: 52,
                         //     child: Theme(
                         //       data: ThemeData(
                         //         cupertinoOverrideTheme: const CupertinoThemeData(
-                        //           primaryColor: Colors.white,
+                        //           primaryColor: AppPallete.white,
                         //         ),
                         //       ),
                         //       child: CupertinoButton.filled(
@@ -207,18 +209,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.of(context).pop();
+                          MainNavigator.pop();
                         },
                         child: const Center(
                           child: Text.rich(
                             TextSpan(
                               children: [
                                 TextSpan(
-                                    text: 'Already have and account? ', style: TextStyle(color: Color(0xFF868D9D))),
+                                    text: 'Already have and account? ', style: TextStyle(color: AppPallete.gray400)),
                                 TextSpan(
                                   text: 'Sign in',
                                   style: TextStyle(
-                                    color: Color(0xFF6E56CF),
+                                    color: AppPallete.purple500,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 14,
                                   ),

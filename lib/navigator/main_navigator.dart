@@ -33,4 +33,6 @@ class MainNavigator {
           fullscreenDialog: true,
         ),
       );
+
+  static void pop() => navigatorKey.currentState?.pop();
 }

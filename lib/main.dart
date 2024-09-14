@@ -7,6 +7,7 @@ import 'package:app_mobile_horosope/firebase_options.dart';
 import 'package:app_mobile_horosope/horoscope_bloc_observer.dart';
 import 'package:app_mobile_horosope/navigator/main_navigator.dart';
 import 'package:app_mobile_horosope/notifications/app_notifications.dart';
+import 'package:app_mobile_horosope/theme/app_pallete.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -57,9 +58,9 @@ class _App extends StatelessWidget {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             fontFamily: 'Poppins',
-            scaffoldBackgroundColor: Colors.white,
+            scaffoldBackgroundColor: AppPallete.white,
             cupertinoOverrideTheme: const CupertinoThemeData(
-              primaryColor: Color(0xFF6E56CF),
+              primaryColor: AppPallete.purple500,
             ),
           ),
           home: const _LoadPage()),
@@ -73,7 +74,7 @@ class _LoadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF6E56CF),
+      backgroundColor: AppPallete.purple500,
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           state is AuthenticationSuccessState ? MainNavigator.home() : MainNavigator.login();
