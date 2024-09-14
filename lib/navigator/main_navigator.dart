@@ -7,32 +7,17 @@ import 'package:flutter/material.dart';
 class MainNavigator {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  static void registration() => navigatorKey.currentState?.push(
-        MaterialPageRoute(
-          builder: (context) => const RegistrationPage(),
-        ),
-      );
-
-  static void login() => navigatorKey.currentState?.push(
-        MaterialPageRoute(
-          builder: (context) => const LoginPage(),
-          fullscreenDialog: true,
-        ),
-      );
-
-  static void home() => navigatorKey.currentState?.push(
-        MaterialPageRoute(
-          builder: (context) => const HomePage(),
-          fullscreenDialog: true,
-        ),
-      );
-
-  static void profilePage() => navigatorKey.currentState?.push(
-        MaterialPageRoute(
-          builder: (context) => const ProfilePage(),
-          fullscreenDialog: true,
-        ),
-      );
-
   static void pop() => navigatorKey.currentState?.pop();
+
+  static void registration() =>
+      navigatorKey.currentState?.push(MaterialPageRoute(builder: (context) => const RegistrationPage()));
+
+  static void login() => navigatorKey.currentState
+      ?.push(MaterialPageRoute(builder: (context) => const LoginPage(), fullscreenDialog: true));
+
+  static void home() => navigatorKey.currentState
+      ?.push(MaterialPageRoute(builder: (context) => const HomePage(), fullscreenDialog: true));
+
+  static void profilePage() => navigatorKey.currentState
+      ?.push(MaterialPageRoute(builder: (context) => const ProfilePage(), fullscreenDialog: true));
 }
