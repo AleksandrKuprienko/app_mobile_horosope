@@ -89,7 +89,7 @@ class SettingPage extends StatelessWidget {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Text(
-                      'Version ${snapshot.data?.version}',
+                      'Version ${snapshot.data?.version} (${snapshot.data?.buildNumber})',
                       style: const TextStyle(color: AppPallete.gray500),
                     );
                   }
