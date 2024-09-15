@@ -6,6 +6,7 @@ import 'package:app_mobile_horosope/navigator/main_navigator.dart';
 import 'package:app_mobile_horosope/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -81,9 +82,19 @@ class SettingPage extends StatelessWidget {
               color: AppPallete.gray500,
             ),
           ]),
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text('Version 0.1.1', style: TextStyle(color: AppPallete.gray500)),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: FutureBuilder(
+                future: PackageInfo.fromPlatform(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(
+                      'Version ${snapshot.data?.version}',
+                      style: const TextStyle(color: AppPallete.gray500),
+                    );
+                  }
+                  return const SizedBox.shrink();
+                }),
           ),
         ],
       ),
