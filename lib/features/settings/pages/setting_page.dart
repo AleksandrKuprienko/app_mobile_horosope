@@ -1,5 +1,6 @@
 import 'package:app_mobile_horosope/components/spacers.dart';
 import 'package:app_mobile_horosope/features/auth/bloc/auth_bloc.dart';
+import 'package:app_mobile_horosope/features/profile/bloc/profile_bloc.dart';
 import 'package:app_mobile_horosope/icons/custom_icons_icons.dart';
 import 'package:app_mobile_horosope/navigator/main_navigator.dart';
 import 'package:app_mobile_horosope/theme/app_pallete.dart';
@@ -66,7 +67,9 @@ class SettingPage extends StatelessWidget {
             _buildNavigationTile('Feedback', CustomIcons.mail, () {}),
           ]),
           _buildSettingsGroup([
-            _buildTextTile('Delete account', CustomIcons.delete, () {}, color: const Color(0xFFE5484D)),
+            _buildTextTile('Delete account', CustomIcons.delete, () {
+              context.read<ProfileBloc>().deleteAccount();
+            }, color: const Color(0xFFE5484D)),
           ]),
           _buildSettingsGroup([
             _buildTextTile(

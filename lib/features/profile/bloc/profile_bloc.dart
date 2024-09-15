@@ -32,4 +32,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       AppNotifications.errorSnackBar('Something goes wrong, try again.');
     }
   }
+
+  void deleteAccount() async {
+    try {
+      await firebaseAuth.currentUser?.delete();
+      AppNotifications.successSnackBar('Account deleted.');
+    } on Object catch (_) {
+      AppNotifications.errorSnackBar('Something goes wrong, try again.');
+    }
+  }
 }
