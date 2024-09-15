@@ -4,6 +4,7 @@ import 'package:app_mobile_horosope/components/spacers.dart';
 import 'package:app_mobile_horosope/features/auth/bloc/auth_bloc.dart';
 import 'package:app_mobile_horosope/icons/custom_icons_icons.dart';
 import 'package:app_mobile_horosope/navigator/main_navigator.dart';
+import 'package:app_mobile_horosope/notifications/app_notifications.dart';
 import 'package:app_mobile_horosope/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -91,7 +92,13 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SpaceH24(),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            if (_emailController.text.isNotEmpty) {
+                              context.read<AuthBloc>().add(ForgotPasswordEvent(email: _emailController.text));
+                            } else {
+                              AppNotifications.errorSnackBar('Please enter your email');
+                            }
+                          },
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [

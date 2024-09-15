@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:app_mobile_horosope/notifications/app_notifications.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,9 +13,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginEvent>((event, emit) => _login(emit: emit, event: event));
     on<LogoutEvent>((event, emit) => _logOut(emit: emit, event: event));
     on<RegistrationEvent>((event, emit) => _registration(emit: emit, event: event));
+    on<ForgotPasswordEvent>((event, emit) => _forgotPassword(emit: emit, event: event));
     on<AuthListenerEvent>((event, emit) async {
       await emit.forEach(firebaseAuth.authStateChanges(), onData: (User? user) {
-        log(user.toString());
         return user != null ? AuthenticationSuccessState() : AuthenticationFailureState();
       });
     });
@@ -50,6 +48,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       await firebaseAuth.createUserWithEmailAndPassword(email: event.email, password: event.password);
       emit(AuthenticationSuccessState());
+    } catch (e) {
+      AppNotifications.errorSnackBar(e.toString());
+      emit(AuthenticationFailureState());
+    }
+  }
+
+  void _forgotPassword({required ForgotPasswordEvent event, required Emitter<AuthState> emit}) async {
+    try {
+      await firebaseAuth.sendPasswordResetEmail(email: event.email);
+      emit(AuthenticationFailureState());
+      AppNotifications.successSnackBar('Email with instructions has been sent.');
+    } on FirebaseAuthException catch (e) {
+      AppNotifications.errorSnackBar(e.message ?? 'Error');
+      emit(AuthenticationFailureState());
     } catch (e) {
       AppNotifications.errorSnackBar(e.toString());
       emit(AuthenticationFailureState());
