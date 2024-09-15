@@ -23,109 +23,120 @@ class HomePage extends StatelessWidget {
         backgroundColor: AppPallete.white,
         body: NestedScrollView(
           floatHeaderSlivers: true,
+          physics: const NeverScrollableScrollPhysics(),
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(
                 automaticallyImplyLeading: false,
                 bottom: PreferredSize(
                   preferredSize: const Size.fromHeight(400.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Stack(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Hello ${context.watch<ProfileBloc>().firebaseAuth.currentUser?.displayName ?? ''}',
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              style:
-                                  const TextStyle(color: Color(0xFFFFFFFF), fontSize: 36, fontWeight: FontWeight.w500),
-                            ),
-                            Row(
+                      SvgPicture.asset(
+                        'assets/images/lines.svg',
+                        alignment: Alignment.bottomCenter,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  DateFormat('EEEE').format(DateTime.now()).toString(),
+                                  'Hello ${context.watch<ProfileBloc>().firebaseAuth.currentUser?.displayName ?? ''}',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
                                   style: const TextStyle(
-                                    color: AppPallete.purple200,
-                                    fontSize: 16,
-                                  ),
+                                      color: Color(0xFFFFFFFF), fontSize: 36, fontWeight: FontWeight.w500),
                                 ),
-                                const Text(
-                                  ', ',
-                                  style: TextStyle(
-                                    color: AppPallete.purple200,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Text(
-                                  DateFormat.yMMMMd().format(DateTime.now()).toString(),
-                                  style: const TextStyle(
-                                    color: AppPallete.purple200,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SpaceH24(),
-                            Container(
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                color: AppPallete.purple400,
-                                borderRadius: BorderRadius.circular(24),
-                              ),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFCFF52C),
-                                          borderRadius: BorderRadius.circular(24),
-                                        ),
-                                        child: const Icon(
-                                          CustomIcons.scorpio,
-                                          size: 28,
-                                          color: Color(0xFF202020),
-                                        ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      DateFormat('EEEE').format(DateTime.now()).toString(),
+                                      style: const TextStyle(
+                                        color: AppPallete.purple200,
+                                        fontSize: 16,
                                       ),
-                                      const SpaceW10(),
-                                      const Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                    ),
+                                    const Text(
+                                      ', ',
+                                      style: TextStyle(
+                                        color: AppPallete.purple200,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    Text(
+                                      DateFormat.yMMMMd().format(DateTime.now()).toString(),
+                                      style: const TextStyle(
+                                        color: AppPallete.purple200,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SpaceH24(),
+                                Container(
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: AppPallete.purple400,
+                                    borderRadius: BorderRadius.circular(24),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Row(
                                         children: [
-                                          Text(
-                                            'Scorpio',
-                                            style: TextStyle(
-                                                color: Color(0xFFFFFFFF), fontSize: 16, fontWeight: FontWeight.w500),
-                                          ),
-                                          Text(
-                                            'Daily horoscope',
-                                            style: TextStyle(
-                                              color: AppPallete.purple200,
-                                              fontSize: 14,
+                                          Container(
+                                            padding: const EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFFCFF52C),
+                                              borderRadius: BorderRadius.circular(24),
+                                            ),
+                                            child: const Icon(
+                                              CustomIcons.scorpio,
+                                              size: 28,
+                                              color: Color(0xFF202020),
                                             ),
                                           ),
+                                          const SpaceW10(),
+                                          const Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Scorpio',
+                                                style: TextStyle(
+                                                    color: Color(0xFFFFFFFF),
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w500),
+                                              ),
+                                              Text(
+                                                'Daily horoscope',
+                                                style: TextStyle(
+                                                  color: AppPallete.purple200,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
+                                          )
                                         ],
-                                      )
+                                      ),
+                                      const SpaceH10(),
+                                      const Text(
+                                        'You’re inclined to trust your intuition with mental Mercury deep-diving through your mysterious eighth house. But the messenger planet’s skirmish with sensible Saturn in your passionate fifth house today advises you to temper your intense desire to make a bold move.',
+                                        style: TextStyle(
+                                          color: Color(0xFFFFFFFF),
+                                          fontSize: 16,
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                  const SpaceH10(),
-                                  const Text(
-                                    'You’re inclined to trust your intuition with mental Mercury deep-diving through your mysterious eighth house. But the messenger planet’s skirmish with sensible Saturn in your passionate fifth house today advises you to temper your intense desire to make a bold move.',
-                                    style: TextStyle(
-                                      color: Color(0xFFFFFFFF),
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                                const SpaceH20(),
+                              ],
                             ),
-                            const SpaceH20(),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -202,29 +213,29 @@ class HomePage extends StatelessWidget {
                 color: AppPallete.gray100,
                 child: const Center(child: Text('advertisment')),
               ),
-              const SizedBox(height: 16),
-              Container(
-                width: double.maxFinite,
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24),
-                  color: const Color(0xFFF7F8FB),
-                ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Lunar Calendar',
-                      style: TextStyle(
-                        color: Color(0xFF202020),
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              const SpaceH16(),
+              // Container(
+              //   width: double.maxFinite,
+              //   margin: const EdgeInsets.symmetric(horizontal: 12),
+              //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(24),
+              //     color: const Color(0xFFF7F8FB),
+              //   ),
+              //   child: const Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Text(
+              //         'Lunar Calendar',
+              //         style: TextStyle(
+              //           color: Color(0xFF202020),
+              //           fontSize: 24,
+              //           fontWeight: FontWeight.w500,
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -239,6 +250,7 @@ class HomePage extends StatelessWidget {
                   CustomIcons.stars,
                   color: Color(0xFFFFFFFF),
                 ),
+                SpaceW8(),
                 Text(
                   'New horoscope',
                   style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 16, fontWeight: FontWeight.w500),

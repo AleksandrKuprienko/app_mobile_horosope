@@ -75,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
             style: const TextStyle(fontWeight: FontWeight.w500, color: Color(0xFF202020), fontSize: 28),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 20),
+          const SpaceH20(),
           Text(
             context.read<ProfileBloc>().firebaseAuth.currentUser?.email ?? '',
             style: const TextStyle(fontWeight: FontWeight.w400, color: AppPallete.gray500, fontSize: 16),

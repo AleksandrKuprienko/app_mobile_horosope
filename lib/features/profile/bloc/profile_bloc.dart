@@ -16,6 +16,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   void updatePhotoUrl({required String photoUrl}) async {
     try {
       await firebaseAuth.currentUser?.updatePhotoURL(photoUrl);
+      firebaseAuth.currentUser?.reload();
       AppNotifications.successSnackBar('Avatar updated.');
     } on Object catch (_) {
       AppNotifications.errorSnackBar('Something goes wrong, try again.');

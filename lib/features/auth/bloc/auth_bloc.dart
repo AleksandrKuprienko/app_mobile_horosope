@@ -21,10 +21,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         return user != null ? AuthenticationSuccessState() : AuthenticationFailureState();
       });
     });
-
-    firebaseAuth.userChanges().listen((modifiedUser) {
-      // print('Modified user ${modifiedUser.toString()}');
-    });
   }
 
   void _login({required LoginEvent event, required Emitter<AuthState> emit}) async {
