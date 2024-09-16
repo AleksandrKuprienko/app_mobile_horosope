@@ -5,7 +5,7 @@ class AppNotifications {
   static GlobalKey<ScaffoldMessengerState> notificationsKey = GlobalKey<ScaffoldMessengerState>();
 
   static successSnackBar(String? message) {
-    notificationsKey.currentState!.hideCurrentSnackBar();
+    notificationsKey.currentState!.clearSnackBars();
     notificationsKey.currentState!.showSnackBar(
       SnackBar(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -24,7 +24,7 @@ class AppNotifications {
   }
 
   static errorSnackBar(String error) {
-    notificationsKey.currentState!.hideCurrentSnackBar();
+    notificationsKey.currentState!.clearSnackBars();
     notificationsKey.currentState!.showSnackBar(
       SnackBar(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
